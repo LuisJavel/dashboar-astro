@@ -1,0 +1,59 @@
+---
+import carteRight from '@/icons/caret-right.svg'
+import {Icon} from 'astro-icon/components'
+import type {Transaction} from "@/types/transactions"
+import TableRow from './TableRow.astro'
+
+type Props = {
+    data: Transaction[];
+}
+const { data } = Astro.props
+---
+
+<div class="card">
+    <div class="header">
+        <div>
+            <h1>Tansaction</h1>
+        <a href="#" class="btn" style="--text-color:var(--accent-purple)">
+            <span>Mirar tracciones</span>
+            <Icon name="caret-right" />
+        </a>
+        </div>
+        <p class="muted">Descubre y guines a lso menores forma de pago</p>
+    </div>
+    <div class="content">
+        {data.map((i) => <TableRow data={i} />)}
+    </div>
+</div>
+
+<style>
+    .card{
+        background-color: var(--bkg);
+        padding: var(--space-l);
+        border-radius: var(--rounded);
+        width: 100%;
+        max-width: 998px;
+    }
+    .header{
+        display: grid;
+        gap: var(--space-2xs);
+        padding: var(--space-l);
+
+        div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: var(--space-xl);
+        }
+        
+        h1{
+            font-size: var(--fs-1);
+            font-weight: bold;
+        }
+    }
+
+    .content{
+        display: grid;
+    }
+
+</style>

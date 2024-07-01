@@ -1,0 +1,67 @@
+---
+import kabod from '@/icons/kabod.svg'
+import type {Transaction} from "@/types/transactions"
+import StatusPill from '@/components/StatusPill.astro'
+import { Icon } from "astro-icon/components";
+
+type Props = {
+    data: Transaction;
+}
+const { data } = Astro.props;
+---
+
+<div class="row">
+    <StatusPill status={data.status}/>
+    <div class="stack">
+        <strong>
+            {data.payment_deets.name}
+            ****
+            {data.payment_deets.name}
+          </strong>
+          <p class="muted">{data.payment_deets.type} payment</p>
+        </div>
+        <div class="stack">
+        <strong>
+            {data.payment_deets.amt.toLocaleString("en-us", {
+                currency: "USD",
+                style: "currency",
+            })}
+        </strong>
+        <p class="muted">{new Date(data.payment_deets.date).toLocaleDateString(undefined, {
+            month: "short",
+            day: "numeric",
+            year: "numeric"
+        })}</p>
+    </div>
+    <p class="muted">{data.payment_deets.vender}</p>
+    <button>
+        <!-- <Icon name="kabod" /> -->
+    </button>
+</div>
+
+<style>
+    .row{
+        display: grid;
+        grid-auto-flow: column;
+        /* grid-template-columns:  120px, 1fr 1fr 1fr; */
+        align-items: center;
+        justify-items: start;
+        /* justify-content: space-between; */
+        grid-template-columns: 170px 290px 120px 150px 1fr;
+        gap: var(--space-l);
+        padding: var(--space-s) var(--space-l);
+    }
+    .stack {
+        display: grid;
+        gap: var(--space-3xs);
+        
+    }
+    button{
+        display: grid;
+        place-items: center;
+        background-color: transparent;
+        border: none;
+        color: var(--muted);
+
+}
+</style>
